@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 public class PokemonSelection extends JFrame {
     private JPanel mainPanel;
     private JLabel imageLabel;
+    private static final int IMG_WIDTH = 200; // Lebar gambar yang diinginkan
+    private static final int IMG_HEIGHT = 200; // Tinggi gambar yang diinginkan
 
     public PokemonSelection() {
         // Set up the frame
@@ -27,9 +29,11 @@ public class PokemonSelection extends JFrame {
         buttonPanel.setLayout(new FlowLayout());
 
         // Add buttons for each Pokémon
-        addButton(buttonPanel, "Pikachu", "pikachu.png");
-        addButton(buttonPanel, "Charmander", "charmander.png");
-        addButton(buttonPanel, "Bulbasaur", "bulbasaur.png");
+        addButton(buttonPanel, "Es", "Monster_Pict/Monster_Es1_rbg.png");
+        addButton(buttonPanel, "Api", "Monster_Pict/Monster_Api1_rbg.png");
+        addButton(buttonPanel, "Tanah", "Monster_Pict/Monster_Tanah1_rbg.png");
+        addButton(buttonPanel, "Air", "Monster_Pict/Monster_Air1_rbg.png");
+        addButton(buttonPanel, "Angin", "Monster_Pict/Monster_Angin1_rbg.png");
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -41,9 +45,10 @@ public class PokemonSelection extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Load and display the selected Pokémon image
+                // Load and resize the selected Pokémon image
                 ImageIcon icon = new ImageIcon(imagePath);
-                imageLabel.setIcon(icon);
+                Image image = icon.getImage().getScaledInstance(IMG_WIDTH, IMG_HEIGHT, Image.SCALE_SMOOTH);
+                imageLabel.setIcon(new ImageIcon(image));
             }
         });
         panel.add(button);
