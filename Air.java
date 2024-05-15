@@ -1,3 +1,4 @@
+
 public class Air extends Monster {
     public Air() {
         super("Air Monster", Element.AIR);
