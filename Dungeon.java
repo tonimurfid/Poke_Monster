@@ -9,9 +9,10 @@ public class Dungeon {
 
     public void explore() {
         // Explore dungeon logic
+        System.out.println("Exploring dungeon...");
     }
 
     public void exit() {
-        // Exit dungeon logic
+        System.out.println("You are exiting the dungeon...");
     }
 }
