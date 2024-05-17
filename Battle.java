@@ -1,8 +1,8 @@
 public interface Battle {
-    double basicAttack();
-    double elementAttack();
-    double specialAttack();
-    double useItem(Item item);
-    void flee();
-    void catchMonster();
+    public void basicAttack(Monster user, Monster target);
+    public void elementAttack(Monster user, Monster target);
+    public void specialAttack(Monster user, Monster target);
+    public void useItem(Item item);
+    public void flee();
+    public void catchMonster(Monster target);
 }

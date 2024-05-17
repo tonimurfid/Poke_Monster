@@ -1,4 +1,4 @@
-public abstract class Monster {
+public abstract class Monster{
     private String name;
     private int level;
     private int HP;

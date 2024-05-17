@@ -1,4 +1,4 @@
-public class Dungeon {
+public class Dungeon implements Battle {
     private Monster playerMonster;
     private Monster enemyMonster;
 
@@ -14,5 +14,36 @@ public class Dungeon {
 
     public void exit() {
         System.out.println("You are exiting the dungeon...");
+    }
+
+    @Override
+    public void basicAttack(Monster user, Monster target) {
+        target.setHP(target.getHP() - user.getAtkPower());
+    }
+
+    @Override
+    public void elementAttack(Monster user, Monster target) {
+        target.setHP(target.getHP() - user.getElementAtkPower());
+    }
+
+    @Override
+    public void specialAttack(Monster user, Monster target) {
+        target.setHP(target.getHP() - user.getSpecialAtkPower());
+    }
+
+    @Override
+    public void useItem(Item item) {
+        
+    }
+
+    @Override
+    public void flee() {
+        
+        
+    }
+
+    @Override
+    public void catchMonster(Monster target) {
+        
     }
 }
