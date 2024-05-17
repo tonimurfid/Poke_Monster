@@ -1,10 +1,19 @@
 public class Es extends Monster {
-    public Es() {
-        super("Es Monster", Element.ES);
+    public Es(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {
+        super(name, Element.AIR);
+        this.level = level;
+        this.HP = HP;
+        this.EP = EP;
+        this.atkPower = atkPower;
+        this.specialAtkPower = specialAtkPower;
+        this.elementAtkPower = elementAtkPower;
+    }
+    
+    public Monster evolveToApi() {
+        return new Api(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 
-    @Override
-    public void evolve() {
-        // Es-specific evolve logic
+    public Monster evolveToAngin(){
+        return new Angin(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 }

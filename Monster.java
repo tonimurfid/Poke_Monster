@@ -1,13 +1,12 @@
 public abstract class Monster {
-    private String name;
-    private int level;
-    private int HP;
-    private int EP;
-    private int atkPower;
-    private int specialAtkPower;
-    private int elementAtkPower;
-    private int defPower;
-    private Element element;
+    protected String name;
+    protected int level;
+    protected int HP;
+    protected int EP;
+    protected int atkPower;
+    protected int specialAtkPower;
+    protected int elementAtkPower;
+    protected Element element;
 
     public Monster(String name, Element element) {
         this.name = name;
@@ -17,8 +16,10 @@ public abstract class Monster {
         this.atkPower = 20;
         this.specialAtkPower = 30;
         this.elementAtkPower = 25;
-        this.defPower = 15;
         this.element = element;
+    }
+    public void setName(String name){
+        this.name = name;
     }
     public int setHP(int HP) {
         this.HP = HP;
@@ -53,10 +54,6 @@ public abstract class Monster {
         return elementAtkPower;
     }
 
-    public int getDefPower() {
-        return defPower;
-    }
-
     public Element getElement() {
         return element;
     }
@@ -68,14 +65,12 @@ public abstract class Monster {
         this.atkPower += 5;
         this.specialAtkPower += 5;
         this.elementAtkPower += 5;
-        this.defPower += 3;
-    }
-
-    public void evolve() {
-        // Evolve logic
     }
 
     public void heal() {
-        this.HP = 100 + (level * 20);  // Restore HP based on level
+        this.HP = Math.min(100 + (level * 20), 400); // misal 400 adalah max hp
+    }
+    public Monster evolveToApi() {
+        return null;
     }
 }

@@ -1,10 +1,19 @@
 public class Api extends Monster {
-    public Api() {
-        super("Api Monster", Element.API);
+    public Api(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {
+        super(name, Element.API);
+        this.level = level;
+        this.HP = HP;
+        this.EP = EP;
+        this.atkPower = atkPower;
+        this.specialAtkPower = specialAtkPower;
+        this.elementAtkPower = elementAtkPower;
+    }
+    
+    public Monster evolveToEs() {
+        return new Es(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 
-    @Override
-    public void evolve() {
-        // Api-specific evolve logic
+    public Monster evolveToAir(){
+        return new Air(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 }
