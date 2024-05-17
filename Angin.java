@@ -1,19 +1,22 @@
 public class Angin extends Monster {
-    public Angin(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {
-        super(name, Element.ANGIN);
-        this.level = level;
-        this.HP = HP;
-        this.EP = EP;
-        this.atkPower = atkPower;
-        this.specialAtkPower = specialAtkPower;
-        this.elementAtkPower = elementAtkPower;
+    public Angin(String name) {
+        super(name);
+        this.element = Element.ANGIN;
+        // this.level = level;
+        // this.HP = HP;
+        // this.EP = EP;
+        // this.atkPower = atkPower;
+        // this.specialAtkPower = specialAtkPower;
+        // this.elementAtkPower = elementAtkPower;
     }
     
+    @Override
     public Monster evolveToEs() {
-        return new Es(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
+        return new Es(getName());
     }
 
+    @Override
     public Monster evolveToTanah(){
-        return new Tanah(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
+        return new Tanah(getName());
     }
 }

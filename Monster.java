@@ -1,14 +1,14 @@
 public abstract class Monster {
-    protected String name;
-    protected int level;
-    protected int HP;
-    protected int EP;
-    protected int atkPower;
-    protected int specialAtkPower;
-    protected int elementAtkPower;
+    private String name;
+    private int level;
+    private int HP;
+    private int EP;
+    private int atkPower;
+    private int specialAtkPower;
+    private int elementAtkPower;
     protected Element element;
 
-    public Monster(String name, Element element) {
+    public Monster(String name) {
         this.name = name;
         this.level = 1;
         this.HP = 100;
@@ -16,7 +16,6 @@ public abstract class Monster {
         this.atkPower = 20;
         this.specialAtkPower = 30;
         this.elementAtkPower = 25;
-        this.element = element;
     }
     public void setName(String name){
         this.name = name;
@@ -71,6 +70,18 @@ public abstract class Monster {
         this.HP = Math.min(100 + (level * 20), 400); // misal 400 adalah max hp
     }
     public Monster evolveToApi() {
+        return null;
+    }
+    public Monster evolveToAngin() {
+        return null;
+    }
+    public Monster evolveToTanah() {
+        return null;
+    }
+    public Monster evolveToAir() {
+        return null;
+    }
+    public Monster evolveToEs() {
         return null;
     }
 }

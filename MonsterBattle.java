@@ -9,7 +9,7 @@ public class MonsterBattle implements Battle {
 
     @Override
     public double basicAttack() {
-        double damage = playerMonster.getAtkPower() - enemyMonster.getDefPower();
+        double damage = playerMonster.getAtkPower();
         if (damage < 0) damage = 0;
         enemyMonster.setHP(enemyMonster.getHP() - (int) damage);
         return damage;
@@ -17,7 +17,7 @@ public class MonsterBattle implements Battle {
 
     @Override
     public double elementAttack() {
-        double damage = playerMonster.getElementAtkPower() - enemyMonster.getDefPower();
+        double damage = playerMonster.getElementAtkPower();
         if (damage < 0) damage = 0;
         enemyMonster.setHP(enemyMonster.getHP() - (int) damage);
         return damage;
@@ -25,7 +25,7 @@ public class MonsterBattle implements Battle {
 
     @Override
     public double specialAttack() {
-        double damage = playerMonster.getSpecialAtkPower() - enemyMonster.getDefPower();
+        double damage = playerMonster.getSpecialAtkPower();
         if (damage < 0) damage = 0;
         enemyMonster.setHP(enemyMonster.getHP() - (int) damage);
         return damage;

@@ -34,7 +34,7 @@ public class PlayerHomebase implements Serializable {
     }
 
     public void evolve(Monster monster) {
-        monster.evolve();
+        monster.evolveToAir();
     }
 
     public void exploreDungeon() {

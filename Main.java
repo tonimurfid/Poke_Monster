@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         // Create a sample player and monsters for demonstration
         Player player = new Player("Ash");
-        Monster monster1 = new Air("kocak",Element.AIR);
-        Monster monster2 = new Air();
+        // Monster monster1 = new Air("kocak",Element.AIR);
+        // Monster monster2 = new Air();
 
         player.addMonster(monster1);
         player.addMonster(monster2);
