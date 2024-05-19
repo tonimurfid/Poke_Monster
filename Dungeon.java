@@ -44,6 +44,6 @@ public class Dungeon implements Battle {
 
     @Override
     public void catchMonster(Monster target) {
-        
+        System.out.println("You caught a " + target.getName() + " !");
     }
 }
