@@ -1,22 +1,25 @@
 public class Wind extends Monster {
+    // untuk create monster baru
     public Wind(String name) {
         super(name);
-        this.element = Element.WIND;
-        // this.level = level;
-        // this.HP = HP;
-        // this.EP = EP;
-        // this.atkPower = atkPower;
-        // this.specialAtkPower = specialAtkPower;
-        // this.elementAtkPower = elementAtkPower;
+        this.element = Element.EARTH;
+        this.atkPower += 5;
+        this.specialAtkPower += 10;
+        this.elementAtkPower += 0;
+    }
+    // untuk evolve
+    public Wind(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {
+        super(name, level, HP, EP, atkPower, specialAtkPower, elementAtkPower);
+        this.element = Element.EARTH;
     }
     
     @Override
     public Monster evolveToEs() {
-        return new Ice(getName());
+        return new Ice(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 
     @Override
     public Monster evolveToTanah(){
-        return new Earth(getName());
+        return new Earth(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 }

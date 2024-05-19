@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerHomebase implements Serializable {
-    private List<Monster> petMonsters;
+    List<Monster> petMonsters;
 
     public PlayerHomebase() {
         this.petMonsters = new ArrayList<>();
@@ -28,7 +28,7 @@ public class PlayerHomebase implements Serializable {
     }
 
     public void pickMonster(Monster monster) {
-        // Select monster for battle
+        
     }
 
     public void healing(Monster monster) {

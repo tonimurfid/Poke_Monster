@@ -1,23 +1,34 @@
 import java.io.Serializable;
 
 public abstract class Monster implements Serializable{
-    private String name;
-    private int level;
-    private int HP;
-    private int EP;
-    private int atkPower;
-    private int specialAtkPower;
-    private int elementAtkPower;
+    protected String name;
+    protected int level;
+    protected int HP;
+    protected int EP;
+    protected int atkPower;
+    protected int specialAtkPower;
+    protected int elementAtkPower;
     protected Element element;
 
+    // CREATE MONSTER
     public Monster(String name) {
         this.name = name;
         this.level = 1;
         this.HP = 100;
         this.EP = 50;
-        this.atkPower = 20;
-        this.specialAtkPower = 30;
-        this.elementAtkPower = 25;
+        this.atkPower = 15;
+        this.specialAtkPower = 20;
+        this.elementAtkPower = 30;
+    }
+    // EVOLVE MONSTER
+    public Monster(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {
+        this.name = name;
+        this.level = level;
+        this.HP = HP;
+        this.EP = EP;
+        this.atkPower = atkPower;
+        this.specialAtkPower = specialAtkPower;
+        this.elementAtkPower = elementAtkPower;
     }
     public void setName(String name){
         this.name = name;

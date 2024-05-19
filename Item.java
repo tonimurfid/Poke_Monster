@@ -1,23 +1,15 @@
 import java.io.Serializable;
 
-public class Item implements Serializable{
-    private int effect = 20;
-    private static int maxUsed = 4;
+public abstract class Item implements Serializable{
 
-    public void getDamagePotion(Monster monster) {
-        if(maxUsed > 0) {
-            monster.setHP(monster.getHP() - effect);
-            maxUsed--;
-        }else{
-            System.out.println("Item ini sudah habis");
-        }
+    private String name;
+    private String type;
+    private int effect;
+    private static int maxUsed;
+
+    public Item(String nama, String type) {
+        this.name = nama;
+        this.type = type;
     }
-    public void getHealingPotion(Monster monster) {
-        if(maxUsed > 0) {
-            monster.setHP(monster.getHP() + effect);
-            maxUsed--;
-        }else{
-            System.out.println("Item ini sudah habis");
-        }
-    }
+    public void getEffect() {}
 }

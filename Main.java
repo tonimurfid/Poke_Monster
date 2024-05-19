@@ -54,7 +54,34 @@ public class Main {
         }
         System.out.println(loadPlayer.getName());
         loadPlayer.getHomeBase().showMonsters();
+        System.out.println("-".repeat(50));
+        
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void saveGame(Player player, String path) {
         try {

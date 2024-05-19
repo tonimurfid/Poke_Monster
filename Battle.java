@@ -4,5 +4,5 @@ public interface Battle {
     public void specialAttack(Monster user, Monster target);
     public void useItem(Item item);
     public void flee();
-    public void catchMonster(Monster target);
+    public Monster catchMonster();
 }
