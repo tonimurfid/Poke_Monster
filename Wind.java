@@ -1,7 +1,7 @@
-public class Angin extends Monster {
-    public Angin(String name) {
+public class Wind extends Monster {
+    public Wind(String name) {
         super(name);
-        this.element = Element.ANGIN;
+        this.element = Element.WIND;
         // this.level = level;
         // this.HP = HP;
         // this.EP = EP;
@@ -12,11 +12,11 @@ public class Angin extends Monster {
     
     @Override
     public Monster evolveToEs() {
-        return new Es(getName());
+        return new Ice(getName());
     }
 
     @Override
     public Monster evolveToTanah(){
-        return new Tanah(getName());
+        return new Earth(getName());
     }
 }

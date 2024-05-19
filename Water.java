@@ -1,7 +1,7 @@
-public class Air extends Monster {
-    public Air(String name) {
+public class Water extends Monster {
+    public Water(String name) {
         super(name);
-        this.element = Element.AIR;
+        this.element = Element.WATER;
         // this.level = level;
         // this.HP = HP;
         // this.EP = EP;
@@ -11,15 +11,15 @@ public class Air extends Monster {
     }
     @Override
     public Monster evolveToApi() {
-        return new Api(getName());
+        return new Fire(getName());
     }
 
     @Override
     public Monster evolveToTanah(){
-        return new Tanah(getName());
+        return new Earth(getName());
     }
     public static void main(String[] args) {
-        Monster monster1 = new Air("kocak");
+        Monster monster1 = new Water("kocak");
         System.out.println(monster1.getElement());
         monster1.setHP(200);
         monster1 = monster1.evolveToApi();

@@ -6,11 +6,18 @@ public class Item implements Serializable{
 
     public void getDamagePotion(Monster monster) {
         if(maxUsed > 0) {
+            monster.setHP(monster.getHP() - effect);
+            maxUsed--;
+        }else{
+            System.out.println("Item ini sudah habis");
+        }
+    }
+    public void getHealingPotion(Monster monster) {
+        if(maxUsed > 0) {
             monster.setHP(monster.getHP() + effect);
             maxUsed--;
         }else{
             System.out.println("Item ini sudah habis");
         }
     }
-    
 }

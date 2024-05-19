@@ -1,4 +1,6 @@
-public abstract class Monster{
+import java.io.Serializable;
+
+public abstract class Monster implements Serializable{
     private String name;
     private int level;
     private int HP;

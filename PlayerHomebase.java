@@ -12,6 +12,12 @@ public class PlayerHomebase implements Serializable {
     public List<Monster> listMonsters() {
         return petMonsters;
     }
+    public void showMonsters() {
+        System.out.println("Your monsters:");
+        for (Monster monster : petMonsters) {
+            System.out.println(monster.getName());
+        }
+    }
 
     public void storeMonster(Monster monster) {
         petMonsters.add(monster);

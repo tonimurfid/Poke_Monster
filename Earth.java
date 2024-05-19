@@ -1,6 +1,7 @@
-public class Api extends Monster {
-    public Api(String name) {
+public class Earth extends Monster {
+    public Earth(String name) {
         super(name);
+        this.element = Element.EARTH;
         // this.level = level;
         // this.HP = HP;
         // this.EP = EP;
@@ -8,14 +9,14 @@ public class Api extends Monster {
         // this.specialAtkPower = specialAtkPower;
         // this.elementAtkPower = elementAtkPower;
     }
-    
+
     @Override
-    public Monster evolveToEs() {
-        return new Es(getName());
+    public Monster evolveToAngin() {
+        return new Wind(getName());
     }
 
     @Override
     public Monster evolveToAir(){
-        return new Air(getName());
+        return new Water(getName());
     }
 }

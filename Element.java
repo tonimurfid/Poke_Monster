@@ -1,9 +1,9 @@
 public enum Element {
-    ES("es"),
-    TANAH("tanah"),
-    API("api"),
-    ANGIN("angin"),
-    AIR("air");
+    ICE("ice"),
+    EARTH("earth"),
+    FIRE("fire"),
+    WIND("wind"),
+    WATER("water");
 
     private final String name;
 
