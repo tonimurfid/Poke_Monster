@@ -73,10 +73,4 @@ public class Dungeon implements Battle {
     public void flee() {
         System.out.println("Fleeing from battle...");
     }
-
-    @Override
-    public Monster catchMonster() {
-        System.out.println("You caught a " + enemyMonster.getName() + " !");
-        return enemyMonster;
-    }
 }
