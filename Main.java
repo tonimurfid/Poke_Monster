@@ -57,17 +57,6 @@ public class Main {
         System.out.println("-".repeat(50));
         Dungeon dungeon = new Dungeon(loadPlayer.getHomeBase());
         dungeon.explore();
-        System.out.println("""
-                1. Explore
-                2. Exit
-                """);
-
-        int choice2 = input.nextInt();input.nextLine();
-        if(choice2 == 1) {
-            dungeon.explore();
-        }else if(choice2 == 2) {
-            dungeon.exit();
-        }
     }
 
     public static void saveGame(Player player, String path) {
