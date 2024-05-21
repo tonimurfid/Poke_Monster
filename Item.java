@@ -11,5 +11,13 @@ public abstract class Item implements Serializable{
         this.name = nama;
         this.type = type;
     }
-    public void getEffect() {}
+    public void getEffect(Monster monster) {}
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

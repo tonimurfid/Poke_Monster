@@ -6,6 +6,7 @@ public class ItemElement extends Item {
     public ItemElement(String nama, String type) {
         super(nama, type);
     }
+    @Override
     public void getEffect(Monster monster) {
         if(maxUsed > 0) {
             monster.setHP(monster.getHP() - effect);
