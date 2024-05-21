@@ -9,7 +9,8 @@ public class ItemElement extends Item {
     @Override
     public void getEffect(Monster monster) {
         if(maxUsed > 0) {
-            monster.setHP(monster.getHP() - effect);
+            monster.setElementAtkPower(monster.getElementAtkPower() + effect);
+            System.out.println("Element Atk Power + " + monster.getElementAtkPower());
             maxUsed--;
         }else{
             System.out.println("Item ini sudah habis");

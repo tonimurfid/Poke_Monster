@@ -8,6 +8,7 @@ public class Dungeon implements Battle {
     private Scanner input = new Scanner(System.in);
     private Item item ;
     private List<Item> itemList = new ArrayList<>();
+    Random random = new Random();
 
     private Monster [] enemy = {
             new Water("Aquarion"),
@@ -31,7 +32,7 @@ public class Dungeon implements Battle {
             if(choice == 0) {
                 break;
             }else if(choice > 0 && choice <= homebase.petMonsters.size()) {
-                Monster pilihan = homebase.petMonsters.get(choice);
+                Monster pilihan = homebase.petMonsters.get(choice-1);
                 choosen.add(pilihan);
                 System.out.println(pilihan.getName() + " added to your team");
             }else{
@@ -53,12 +54,11 @@ public class Dungeon implements Battle {
         }
         
         // choose enemy monster
-        Random random = new Random();
         enemyMonster = enemy[random.nextInt(5)];
         System.out.println("Battle found: " + enemyMonster.getName()); 
         System.out.println("Choose your Poke-Monster: ");
         int choice = input.nextInt();input.nextLine();
-        playerMonster = choosen.get(choice);
+        playerMonster = choosen.get(choice-1);
         System.out.println("Your Poke-Monster: " + playerMonster.getName());
         System.out.println("Battle started...");
         System.out.println("""
@@ -82,41 +82,69 @@ public class Dungeon implements Battle {
             }else if(action == 3) {
                 specialAttack(playerMonster, enemyMonster);
             }else if(action == 4) {
-                itemList.add(new ItemHeal("Healer", "Heal"));
-                useItem(playerMonster, item);
-                itemList.add(new ItemElement("Elixir", "Element"));
+                List<Item> itemEnemy = new ArrayList<>();
+                itemEnemy.add(new ItemElement("Elixir", "Element"));
+                itemEnemy.add(new ItemHeal("Healer", "Heal"));
                 System.out.println("""
                         Choose item:
                         1. Element
                         2. Heal
                         """);
                 int itemChoice = input.nextInt();input.nextLine();
-                item = itemList.get(itemChoice);
+                item = itemEnemy.get(itemChoice-1);
                 useItem(playerMonster, item);
             }else if(action == 5) {
                 flee();
+                return;
+            }
+            if (playerMonster.getHP() > 0 && enemyMonster.getHP() > 0) {
+                int enemyAction = random.nextInt(4)+1;
+                if(enemyAction == 1) {
+                    basicAttack(enemyMonster, playerMonster);
+                }else if(enemyAction == 2) {
+                    elementAttack(enemyMonster, playerMonster);
+                }else if(enemyAction == 3) {
+                    specialAttack(enemyMonster, playerMonster);
+                }else if(enemyAction == 4) {
+                    itemList.add(new ItemElement("Elixir", "Element"));
+                    itemList.add(new ItemHeal("Healer", "Heal"));
+                    System.out.println("""
+                            Choose item:
+                            1. Element
+                            2. Heal
+                            """);
+                    int itemChoice = random.nextInt(2)+1;
+                    item = itemList.get(itemChoice-1);
+                    useItem(enemyMonster, item);
+                }
             }
         }
-        System.out.println("Enter 0 to exit");
     }
 
     public void exit() {
         System.out.println("You are exiting the dungeon...");
+        System.exit(0);
     }
 
     @Override
     public void basicAttack(Monster user, Monster target) {
         target.setHP(target.getHP() - user.getAtkPower());
+        System.out.println(user.getName() + " used Basic Attack on " + target.getName() + " with " + user.getAtkPower() + " damage");
+        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
     }
 
     @Override
     public void elementAttack(Monster user, Monster target) {
         target.setHP(target.getHP() - user.getElementAtkPower());
+        System.out.println(user.getName() + " used Element Attack on " + target.getName() + " with " + user.getElementAtkPower() + " damage");
+        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
     }
 
     @Override
     public void specialAttack(Monster user, Monster target) {
         target.setHP(target.getHP() - user.getSpecialAtkPower());
+        System.out.println(user.getName() + " used Special Attack on " + target.getName() + " with " + user.getSpecialAtkPower() + " damage");
+        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
     }
 
     @Override

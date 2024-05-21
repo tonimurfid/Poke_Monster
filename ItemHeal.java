@@ -10,6 +10,7 @@ public class ItemHeal extends Item {
     public void getEffect(Monster monster) {
         if(maxUsed > 0) {
             monster.setHP(monster.getHP() + effect);
+            System.out.println("Heal " + effect + " HP to " + monster.getName());
             maxUsed--;
         }else{
             System.out.println("Item ini sudah habis");
