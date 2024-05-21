@@ -70,31 +70,6 @@ public class Main {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static void saveGame(Player player, String path) {
         try {
             // Membuka file output stream

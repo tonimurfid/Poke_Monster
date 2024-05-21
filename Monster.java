@@ -33,14 +33,12 @@ public abstract class Monster implements Serializable{
     public void setName(String name){
         this.name = name;
     }
-    public int setHP(int HP) {
-        this.HP = HP;
-        return HP;
+    public void setHP(int HP) {
+        this.HP = Math.min(HP, 100);
     }
 
-    public int setElementAtkPower(int elementAtkPower) {
+    public void setElementAtkPower(int elementAtkPower) {
         this.elementAtkPower = elementAtkPower;
-        return elementAtkPower;
     }
 
     public String getName() {
