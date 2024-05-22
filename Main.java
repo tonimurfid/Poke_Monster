@@ -44,10 +44,10 @@ public class Main {
                     break;
             }
         }
-        saveGame(player,"SaveGame/game_save.txt");
+        saveGame(player,"SaveGame/game_save1.txt");
         Player loadPlayer = null;
         try{
-            loadPlayer = loadGame("SaveGame/game_save.txt");
+            loadPlayer = loadGame("SaveGame/game_save1.txt");
         }catch(Exception e){
             e.printStackTrace();
             System.exit(0);

@@ -36,6 +36,9 @@ public abstract class Monster implements Serializable{
     public void setHP(int HP) {
         this.HP = Math.min(HP, 100);
     }
+    public void setLevel(int level) {
+        this.level = Math.min(level, 99);
+    }
 
     public void setElementAtkPower(int elementAtkPower) {
         this.elementAtkPower = elementAtkPower;
@@ -75,9 +78,9 @@ public abstract class Monster implements Serializable{
 
     public void levelUp() {
         this.level++;
-        this.HP += 20;
-        this.EP += 10;
-        this.atkPower += 5;
+        this.HP += 10;
+        this.EP += 5;
+        this.atkPower += 7;
         this.specialAtkPower += 5;
         this.elementAtkPower += 5;
     }

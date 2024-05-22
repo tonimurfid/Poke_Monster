@@ -155,19 +155,52 @@ public class Dungeon implements Battle {
     }
 
     @Override
+    public void specialAttack(Monster user, Monster target) {
+        int chance = random.nextInt(5)+1;
+        if(chance > 3) {
+            target.setHP(target.getHP() - user.getSpecialAtkPower());
+            user.setHP(((int)user.getHP()*90/100));
+            System.out.println(user.getName() + " used Special Attack on " + target.getName() + " with " + user.getSpecialAtkPower() + " damage");
+            System.out.println(target.getName() + " has " + target.getHP() + " HP left");
+        }else{
+            System.out.println(user.getName() + " failed to use Special Attack on " + target.getName());
+        }
+    }
+    @Override
     public void elementAttack(Monster user, Monster target) {
+        switch (user.getElement()) {
+            case EARTH:
+                if(target instanceof Water){
+                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                }
+                break;
+            case WATER:
+                if(target instanceof Fire){
+                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                }
+                break;
+            case FIRE:
+                if(target instanceof Ice){
+                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                }
+                break;
+            case ICE:
+                if(target instanceof Wind){
+                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                }
+                break;
+            case WIND:
+                if(target instanceof Earth){
+                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                }
+                break;
+            default:
+                break;
+        }
         target.setHP(target.getHP() - user.getElementAtkPower());
         System.out.println(user.getName() + " used Element Attack on " + target.getName() + " with " + user.getElementAtkPower() + " damage");
         System.out.println(target.getName() + " has " + target.getHP() + " HP left");
     }
-
-    @Override
-    public void specialAttack(Monster user, Monster target) {
-        target.setHP(target.getHP() - user.getSpecialAtkPower());
-        System.out.println(user.getName() + " used Special Attack on " + target.getName() + " with " + user.getSpecialAtkPower() + " damage");
-        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
-    }
-
     @Override
     public void useItem(Monster user, Item item) {
         item.getEffect(user);

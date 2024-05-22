@@ -1,9 +1,12 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class PlayerHomebase implements Serializable {
     List<Monster> petMonsters;
+    List<Monster> copyMonsters;
+    List<Item> itemList = new ArrayList<>();
 
     public PlayerHomebase() {
         this.petMonsters = new ArrayList<>();
@@ -27,8 +30,10 @@ public class PlayerHomebase implements Serializable {
         petMonsters.remove(monster);
     }
 
-    public void pickMonster(Monster monster) {
-        
+    public void copy() {
+        for(Monster m : petMonsters) {
+            copyMonsters.add(m);
+        }
     }
 
     public void healing(Monster monster) {
@@ -36,7 +41,10 @@ public class PlayerHomebase implements Serializable {
     }
 
     public void levelUp(Monster monster) {
-        monster.levelUp();
+        if(monster.getEP() >= 100) {
+            monster.levelUp();
+            System.out.println(monster.getName() + " level up!");
+        }
     }
 
     public void evolve(Monster monster) {
@@ -44,6 +52,34 @@ public class PlayerHomebase implements Serializable {
     }
 
     public void exploreDungeon() {
-        // Implementation for exploring dungeon
+        Dungeon dungeon = new Dungeon(this);
+        dungeon.explore();
+    }
+
+    public Item shopItem() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("""
+                Shop :
+                0. Exit
+                1. Healing Potion (+10 HP)
+                2. Elixir (+20 EP)
+                """);
+        switch (input.nextInt()) {
+            case 0:
+                break;
+            case 1:
+                if(itemList.size() < 3) {
+                    itemList.add(new ItemHeal("Healing Potion", "Heal"));
+                }
+                break;
+            case 2:
+                if(itemList.size() < 3) {
+                    itemList.add(new ItemHeal("Elixir", "Elemental"));
+                }
+                break;
+            default:
+                break;
+        }
+        return null;
     }
 }
