@@ -7,7 +7,7 @@ public class ItemHeal extends Item {
         super(nama, type);
     }
     @Override
-    public void getEffect(Monster monster) {
+    public void getEffect(Monster monster, Monster target) {
         if(maxUsed > 0) {
             monster.setHP(monster.getHP() + effect);
             System.out.println("Heal " + effect + " HP to " + monster.getName());

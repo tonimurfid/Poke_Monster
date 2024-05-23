@@ -22,4 +22,5 @@ public class Wind extends Monster {
     public Monster evolveToFire(){
         return new Fire(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
+    
 }

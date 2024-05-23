@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.List;
 
-public class Dungeon implements Battle {
+public class Dungeon{
     private PlayerHomebase homebase;
     private Monster playerMonster;
     private Monster enemyMonster;
@@ -65,56 +65,54 @@ public class Dungeon implements Battle {
             playerMonster = choosen.get(choice-1);
             System.out.println("Your Poke-Monster: " + playerMonster.getName());
             System.out.println("Battle started...");
-            System.out.println("""
-                    1. Basic Attack
-                    2. Element Attack
-                    3. Special Attack
-                    4. Use Item
-                    5. Flee
-                    """);
-    
+            
             // battle logic
             while(playerMonster.getHP() > 0 && enemyMonster.getHP() > 0) {
+                System.out.println("""
+                        1. Basic Attack
+                        2. Element Attack
+                        3. Special Attack
+                        4. Use Item
+                        5. Flee
+                        """);
                 System.out.println("Choose action: ");
                 int action = input.nextInt();input.nextLine();
                 if(action == 0) {
                     break;
                 }else if(action == 1) {
-                    basicAttack(playerMonster, enemyMonster);
+                    playerMonster.basicAttack(enemyMonster);
                 }else if(action == 2) {
-                    elementAttack(playerMonster, enemyMonster);
+                    playerMonster.elementAttack(enemyMonster);
                 }else if(action == 3) {
-                    specialAttack(playerMonster, enemyMonster);
+                    playerMonster.specialAttack(enemyMonster);
                 }else if(action == 4) {
-
-                    itemList.add(new ItemElement("Elixir", "Element"));
-                    itemList.add(new ItemHeal("Healer", "Heal"));
-                    System.out.println("""
-                            Choose item:
-                            1. Element
-                            2. Heal
-                            """);
-                    int itemChoice = input.nextInt();input.nextLine();
+                    int count = 1;
+                    for(Item i : itemList) {
+                        System.out.println("Item " + count++);
+                        i.printItem();
+                    }
+                    int itemChoice = input.nextInt();
                     item = itemList.get(itemChoice-1);
-                    useItem(playerMonster, item);
+                    itemList.remove(itemChoice-1);
+                    playerMonster.useItem(enemyMonster,item);
                 }else if(action == 5) {
-                    flee();
-                    return;
+                    playerMonster.flee();
                 }
                 if (playerMonster.getHP() > 0 && enemyMonster.getHP() > 0) {
                     int enemyAction = random.nextInt(4)+1;
                     if(enemyAction == 1) {
-                        basicAttack(enemyMonster, playerMonster);
+                        enemyMonster.basicAttack(playerMonster);
                     }else if(enemyAction == 2) {
-                        elementAttack(enemyMonster, playerMonster);
+                        enemyMonster.elementAttack(playerMonster);
                     }else if(enemyAction == 3) {
-                        specialAttack(enemyMonster, playerMonster);
+                        enemyMonster.specialAttack(playerMonster);
                     }else if(enemyAction == 4) {
                         itemEnemy.add(new ItemElement("Elixir", "Element"));
                         itemEnemy.add(new ItemHeal("Healer", "Heal"));
                         int itemChoice = random.nextInt(2)+1;
                         item = itemEnemy.get(itemChoice-1);
-                        useItem(enemyMonster, item);
+                        itemEnemy.remove(itemChoice-1);
+                        enemyMonster.useItem(playerMonster, item);
                     }
                 }
             }
@@ -127,87 +125,20 @@ public class Dungeon implements Battle {
             }
             System.out.println("""
                 1. Explore
-                2. Exit
+                2. Homebase
+                3. Exit
                 """);
 
-        int choice2 = input.nextInt();input.nextLine();
-        if(choice2 == 1) {
-            explore();
-        }else if(choice2 == 2) {
-            exit();
+            int choice2 = input.nextInt();input.nextLine();
+            switch (choice2) {
+                case 1:
+                    break;
+                case 2:
+                    homebase.enterHomebase();
+                    break;
+                default:
+                    break;
+            }
         }
-        }
-    }
-
-    public void exit() {
-        System.out.println("You are exiting the dungeon...");
-        System.exit(0);
-    }
-
-    @Override
-    public void basicAttack(Monster user, Monster target) {
-        target.setHP(target.getHP() - user.getAtkPower());
-        System.out.println(user.getName() + " used Basic Attack on " + target.getName() + " with " + user.getAtkPower() + " damage");
-        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
-    }
-
-    @Override
-    public void specialAttack(Monster user, Monster target) {
-        int chance = random.nextInt(5)+1;
-        if(chance > 3) {
-            target.setHP(target.getHP() - user.getSpecialAtkPower());
-            user.setHP(((int)user.getHP()*90/100));
-            System.out.println(user.getName() + " used Special Attack on " + target.getName() + " with " + user.getSpecialAtkPower() + " damage");
-            System.out.println(target.getName() + " has " + target.getHP() + " HP left");
-        }else{
-            System.out.println(user.getName() + " failed to use Special Attack on " + target.getName());
-        }
-    }
-    @Override
-    public void elementAttack(Monster user, Monster target) {
-        int elementAttackPower = user.getElementAtkPower();
-        switch (user.getElement()) {
-            case EARTH:
-                if(target instanceof Water){
-                    elementAttackPower = (int) (elementAttackPower * 1.2);
-                }
-                break;
-            case WATER:
-                if(target instanceof Fire){
-                    elementAttackPower = (int) (elementAttackPower * 1.2);
-                }
-                break;
-            case FIRE:
-                if(target instanceof Ice){
-                    elementAttackPower = (int) (elementAttackPower * 1.2);
-                }
-                break;
-            case ICE:
-                if(target instanceof Wind){
-                    elementAttackPower = (int) (elementAttackPower * 1.2);
-                }
-                break;
-            case WIND:
-                if(target instanceof Earth){
-                    elementAttackPower = (int) (elementAttackPower * 1.2);
-                }
-                break;
-            default:
-                break;
-        }
-        target.setHP(target.getHP() - elementAttackPower);
-        System.out.println(user.getName() + " used Element Attack on " + target.getName() + " with " + elementAttackPower + " damage");
-        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
-    }
-    @Override
-    public void useItem(Monster user, Item item) {
-        item.getEffect(user);
-        System.out.println("Item used: " + item.getName());
-    }
-
-    @Override
-    public void flee() {
-        System.out.println("Fleeing from battle...");
-        return;
     }
 }

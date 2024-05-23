@@ -52,11 +52,15 @@ public class Main {
             e.printStackTrace();
             System.exit(0);
         }
-        System.out.println(loadPlayer.getName());
+        try{
+            System.out.println(loadPlayer.getName());
         loadPlayer.getHomeBase().showMonsters();
         System.out.println("-".repeat(50));
         loadPlayer.getHomeBase().enterHomebase();
+        }
+        finally{
+            loadPlayer.setName("Ash Ketchum");
+            GameManager.saveGame(loadPlayer, "SaveGame/game_save2.txt");
+        }
     }
-
-    
 }

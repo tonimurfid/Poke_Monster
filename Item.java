@@ -11,13 +11,18 @@ public abstract class Item implements Serializable{
         this.name = nama;
         this.type = type;
     }
-    public void getEffect(Monster monster) {}
+    public void getEffect(Monster monster, Monster target) {}
 
+    public void getEffect(Monster monster, Monster target, Element element) {}
     public String getName() {
         return name;
     }
 
     public String getType() {
         return type;
+    }
+    public void printItem() {
+        System.out.println("Name : " + name);
+        System.out.println("Type : " + type);
     }
 }

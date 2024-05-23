@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class PlayerHomebase implements Serializable {
     List<Monster> petMonsters;
-    List<Monster> copyMonsters;
+    List<Monster> copyMonsters = new ArrayList<>();
     List<Item> itemList = new ArrayList<>();
 
     public PlayerHomebase() {
@@ -17,7 +17,7 @@ public class PlayerHomebase implements Serializable {
     }
     public void enterHomebase() {
         Scanner input = new Scanner(System.in);
-        copyMonsters = new ArrayList<>(petMonsters);
+        copy();
         while (true) {
                 System.out.println("""
                         Welcome to your homebase!
@@ -30,9 +30,7 @@ public class PlayerHomebase implements Serializable {
                 
                 switch (input.nextInt()) {
                     case 1:
-                        for(Monster m : petMonsters) {
-                            healing();
-                        }
+                        healing();
                         break;
                     case 2:
                         System.out.println("Choose monster to level up");
@@ -97,7 +95,11 @@ public class PlayerHomebase implements Serializable {
         petMonsters.remove(monster);
     }
 
-
+public void copy() {
+    for(Monster m : petMonsters) {
+        copyMonsters.add(m);
+    }
+}
     public void healing() {
         for (int i = 0; i < petMonsters.size(); i++) {
             Monster petMonster = petMonsters.get(i);
@@ -259,6 +261,8 @@ public class PlayerHomebase implements Serializable {
                     if(monster.getEP() >= 10) {
                         monster.setEP(monster.getEP() - 10);
                     itemList.add(new ItemHeal("Healing Potion", "Heal"));
+                    }else {
+                        System.out.println("Not enough EP");
                     }
                 }
                 break;
@@ -267,6 +271,8 @@ public class PlayerHomebase implements Serializable {
                     if(monster.getEP() >= 20) {
                         monster.setEP(monster.getEP() - 20);
                         itemList.add(new ItemHeal("Elixir", "Elemental"));
+                    }else {
+                        System.out.println("Not enough EP");
                     }
                 }
                 break;

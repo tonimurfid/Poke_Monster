@@ -33,4 +33,8 @@ public class Player implements Serializable{
     public void removeMonster(Monster monster) {
         homeBase.removeMonster(monster);
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

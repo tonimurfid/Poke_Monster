@@ -1,6 +1,8 @@
 import java.io.Serializable;
+import java.util.Random;
+import java.util.Scanner;
 
-public abstract class Monster implements Serializable{
+public abstract class Monster implements Battle, Serializable{
     protected String name;
     protected int level;
     protected int HP;
@@ -102,5 +104,115 @@ public abstract class Monster implements Serializable{
     }
     public void setEP(int EP) {
         this.EP = EP;
+    }
+    @Override
+    public void basicAttack(Monster target) {
+        target.setHP(target.getHP() - this.getAtkPower());
+        System.out.println(this.getName() + " used Basic Attack on " + target.getName() + " with " + this.getAtkPower() + " damage");
+        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
+    }
+
+    @Override
+    public void specialAttack(Monster target) {
+        Random random = new Random();
+        int chance = random.nextInt(5)+1;
+        if(chance > 3) {
+            target.setHP(target.getHP() - this.getSpecialAtkPower());
+            this.setHP(((int)this.getHP()*90/100));
+            System.out.println(this.getName() + " used Special Attack on " + target.getName() + " with " + this.getSpecialAtkPower() + " damage");
+            System.out.println(target.getName() + " has " + target.getHP() + " HP left");
+        }else{
+            System.out.println(this.getName() + " failed to use Special Attack on " + target.getName());
+        }
+    }
+    @Override
+    public void elementAttack(Monster target) {
+        int elementAttackPower = this.getElementAtkPower();
+        switch (this.getElement()) {
+            case EARTH:
+                if(target instanceof Water){
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
+                }
+                break;
+            case WATER:
+                if(target instanceof Fire){
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
+                }
+                break;
+            case FIRE:
+                if(target instanceof Ice){
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
+                }
+                break;
+            case ICE:
+                if(target instanceof Wind){
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
+                }
+                break;
+            case WIND:
+                if(target instanceof Earth){
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
+                }
+                break;
+            default:
+                break;
+        }
+        target.setHP(target.getHP() - elementAttackPower);
+        System.out.println(this.getName() + " used Element Attack on " + target.getName() + " with " + elementAttackPower + " damage");
+        System.out.println(target.getName() + " has " + target.getHP() + " HP left");
+    }
+    @Override
+    public void useItem(Monster target, Item item) {
+        if(item instanceof ItemElement) {
+            System.out.println("""
+                    choose element to use:
+                    1. Earth
+                    2. Water
+                    3. Fire
+                    4. Ice
+                    5. Wind
+                    """);
+            Scanner input = new Scanner(System.in);
+            int choice = input.nextInt();
+            Element element = null;
+            switch (choice) {
+                case 1:
+                    element = Element.EARTH;
+                    break;
+                case 2:
+                    element = Element.WATER;
+                    break;
+                case 3:
+                    element = Element.FIRE;
+                    break;
+                case 4:
+                    element = Element.ICE;
+                    break;
+                case 5:
+                    element = Element.WIND;
+                    break;
+                default:
+            item.getEffect(target, target, element);
+            System.out.println("Item used: " + item.getName());
+        }
+        }else{
+            item.getEffect(this, target);
+            System.out.println("Item used: " + item.getName());
+        }
+    }
+    public void useItem(Item item, Monster target, Element element) {
+        item.getEffect(this, target, element);
+    }
+
+    @Override
+    public void flee() {
+        Random random = new Random();
+        int chance = random.nextInt(5)+1;
+        if(chance > 3) {
+            System.out.println("Fleeing from battle...");
+            return;
+        }else{
+            System.out.println("Failed to flee from battle...");
+        }
     }
 }
