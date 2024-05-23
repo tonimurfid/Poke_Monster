@@ -97,11 +97,6 @@ public class PlayerHomebase implements Serializable {
         petMonsters.remove(monster);
     }
 
-    // public void copy() {
-    //     for(Monster m : petMonsters) {
-    //         copyMonsters.add(m);
-    //     }
-    // }
 
     public void healing() {
         for (int i = 0; i < petMonsters.size(); i++) {
