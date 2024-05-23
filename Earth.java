@@ -4,8 +4,8 @@ public class Earth extends Monster {
         super(name);
         this.element = Element.EARTH;
         this.atkPower += 5;
-        this.specialAtkPower += 10;
-        this.elementAtkPower += 0;
+        this.specialAtkPower += 0;
+        this.elementAtkPower += 20;
     }
     // untuk evolve
     public Earth(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {

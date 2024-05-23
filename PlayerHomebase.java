@@ -17,6 +17,7 @@ public class PlayerHomebase implements Serializable {
     }
     public void enterHomebase() {
         Scanner input = new Scanner(System.in);
+        copyMonsters = new ArrayList<>(petMonsters);
         while (true) {
                 System.out.println("""
                         Welcome to your homebase!
@@ -30,7 +31,7 @@ public class PlayerHomebase implements Serializable {
                 switch (input.nextInt()) {
                     case 1:
                         for(Monster m : petMonsters) {
-                            healing(m);
+                            healing();
                         }
                         break;
                     case 2:
@@ -96,15 +97,21 @@ public class PlayerHomebase implements Serializable {
         petMonsters.remove(monster);
     }
 
-    public void copy() {
-        for(Monster m : petMonsters) {
-            copyMonsters.add(m);
+    // public void copy() {
+    //     for(Monster m : petMonsters) {
+    //         copyMonsters.add(m);
+    //     }
+    // }
+
+    public void healing() {
+        for (int i = 0; i < petMonsters.size(); i++) {
+            Monster petMonster = petMonsters.get(i);
+            Monster copyMonster = copyMonsters.get(i);
+            petMonster.setHP(copyMonster.getHP());
+            petMonster.setEP(copyMonster.getEP());
         }
     }
-
-    public void healing(Monster monster) {
-        monster.heal();
-    }
+    
 
     public void levelUp(Monster monster) {
         if(monster.getEP() >= 100) {

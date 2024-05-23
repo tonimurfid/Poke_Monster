@@ -4,8 +4,8 @@ public class Fire extends Monster {
         super(name);
         this.element = Element.FIRE;
         this.atkPower += 5;
-        this.specialAtkPower += 10;
-        this.elementAtkPower += 0;
+        this.specialAtkPower += 5;
+        this.elementAtkPower += 15;
     }
     // untuk evolve
     public Fire(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {

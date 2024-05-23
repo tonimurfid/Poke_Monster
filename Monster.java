@@ -14,7 +14,7 @@ public abstract class Monster implements Serializable{
     public Monster(String name) {
         this.name = name;
         this.level = 1;
-        this.HP = 100;
+        this.HP = 120;
         this.EP = 50;
         this.atkPower = 15;
         this.specialAtkPower = 20;
@@ -34,6 +34,7 @@ public abstract class Monster implements Serializable{
         this.name = name;
     }
     public void setHP(int HP) {
+        int maxHP = 100 + (this.level * 20);
         this.HP = Math.min(HP, 100);
     }
     public void setLevel(int level) {
@@ -83,11 +84,6 @@ public abstract class Monster implements Serializable{
         this.atkPower += 7;
         this.specialAtkPower += 5;
         this.elementAtkPower += 5;
-    }
-
-    public void heal() {
-        int maxHP = 100 + (level * 20);
-        this.HP = maxHP; // misal 400 adalah max hp
     }
     public Monster evolveToFire() {
         return null;

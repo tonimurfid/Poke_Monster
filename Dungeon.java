@@ -8,14 +8,15 @@ public class Dungeon implements Battle {
     private Scanner input = new Scanner(System.in);
     private Item item ;
     private List<Item> itemList;
+    private List<Item> itemEnemy = new ArrayList<>();
     Random random = new Random();
 
     private Monster [] enemy = {
-            new Water("Aquarion"),
-            new Fire("Blazetalon"),
-            new Earth("Terraquake"),
-            new Wind("Galehawk"),
-            new Ice("Frosthorn")
+            new Water("Waterion"),
+            new Fire("Charid"),
+            new Earth("Terrabyte"),
+            new Wind("Flyer"),
+            new Ice("Iceberg")
     };
 
     public Dungeon(PlayerHomebase homebase, List<Item> itemList) {
@@ -85,16 +86,16 @@ public class Dungeon implements Battle {
                 }else if(action == 3) {
                     specialAttack(playerMonster, enemyMonster);
                 }else if(action == 4) {
-                    List<Item> itemEnemy = new ArrayList<>();
-                    itemEnemy.add(new ItemElement("Elixir", "Element"));
-                    itemEnemy.add(new ItemHeal("Healer", "Heal"));
+
+                    itemList.add(new ItemElement("Elixir", "Element"));
+                    itemList.add(new ItemHeal("Healer", "Heal"));
                     System.out.println("""
                             Choose item:
                             1. Element
                             2. Heal
                             """);
                     int itemChoice = input.nextInt();input.nextLine();
-                    item = itemEnemy.get(itemChoice-1);
+                    item = itemList.get(itemChoice-1);
                     useItem(playerMonster, item);
                 }else if(action == 5) {
                     flee();
@@ -109,15 +110,10 @@ public class Dungeon implements Battle {
                     }else if(enemyAction == 3) {
                         specialAttack(enemyMonster, playerMonster);
                     }else if(enemyAction == 4) {
-                        itemList.add(new ItemElement("Elixir", "Element"));
-                        itemList.add(new ItemHeal("Healer", "Heal"));
-                        System.out.println("""
-                                Choose item:
-                                1. Element
-                                2. Heal
-                                """);
+                        itemEnemy.add(new ItemElement("Elixir", "Element"));
+                        itemEnemy.add(new ItemHeal("Healer", "Heal"));
                         int itemChoice = random.nextInt(2)+1;
-                        item = itemList.get(itemChoice-1);
+                        item = itemEnemy.get(itemChoice-1);
                         useItem(enemyMonster, item);
                     }
                 }
