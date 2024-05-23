@@ -14,12 +14,12 @@ public class Wind extends Monster {
     }
     
     @Override
-    public Monster evolveToEs() {
+    public Monster evolveToIce() {
         return new Ice(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 
     @Override
-    public Monster evolveToTanah(){
+    public Monster evolveToEarth(){
         return new Earth(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 }

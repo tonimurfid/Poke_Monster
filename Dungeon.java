@@ -7,7 +7,7 @@ public class Dungeon implements Battle {
     private Monster enemyMonster;
     private Scanner input = new Scanner(System.in);
     private Item item ;
-    private List<Item> itemList = new ArrayList<>();
+    private List<Item> itemList;
     Random random = new Random();
 
     private Monster [] enemy = {
@@ -18,8 +18,9 @@ public class Dungeon implements Battle {
             new Ice("Frosthorn")
     };
 
-    public Dungeon(PlayerHomebase homebase) {
+    public Dungeon(PlayerHomebase homebase, List<Item> itemList) {
         this.homebase = homebase;
+        this.itemList = itemList;
     }
     private List<Monster> ChoosenMonster() {
         List<Monster> choosen = new ArrayList<>();

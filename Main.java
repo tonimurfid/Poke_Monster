@@ -55,8 +55,8 @@ public class Main {
         System.out.println(loadPlayer.getName());
         loadPlayer.getHomeBase().showMonsters();
         System.out.println("-".repeat(50));
-        Dungeon dungeon = new Dungeon(loadPlayer.getHomeBase());
-        dungeon.explore();
+        PlayerHomebase playerHomebase = new PlayerHomebase();
+        playerHomebase.enterHomebase();
     }
 
     public static void saveGame(Player player, String path) {

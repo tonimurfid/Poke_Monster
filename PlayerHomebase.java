@@ -15,6 +15,71 @@ public class PlayerHomebase implements Serializable {
     public List<Monster> listMonsters() {
         return petMonsters;
     }
+    public void enterHomebase() {
+        Scanner input = new Scanner(System.in);
+        while (true) {
+                System.out.println("""
+                        Welcome to your homebase!
+                        1. Heal
+                        2. Level Up
+                        3. Evolve
+                        4. Shop
+                        5. Explore
+                        """);
+                
+                switch (input.nextInt()) {
+                    case 1:
+                        for(Monster m : petMonsters) {
+                            healing(m);
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Choose monster to level up");
+                        showMonsters();
+                        switch (input.nextInt()) {
+                            case 1:
+                                levelUp(petMonsters.get(0));
+                                break;
+                            case 2:
+                                levelUp(petMonsters.get(1));
+                                break;
+                            case 3:
+                                levelUp(petMonsters.get(2));
+                                break;
+                            default:
+                                System.out.println("Invalid input");
+                                break;
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Choose monster to evolve");
+                        showMonsters();
+                        switch (input.nextInt()) {
+                            case 1:
+                                evolve(petMonsters.get(0));
+                                break;
+                            case 2:
+                                evolve(petMonsters.get(1));
+                                break;
+                            case 3:
+                                evolve(petMonsters.get(2));
+                                break;
+                            default:
+                                System.out.println("Invalid input");
+                                break;
+                        }
+                        break;
+                    case 4:
+                        shopItem();
+                        break;
+                    case 5:
+                        exploreDungeon();
+                        break;
+                    default:
+                        break;
+                }
+            }
+    }
     public void showMonsters() {
         System.out.println("Your monsters:");
         for (Monster monster : petMonsters) {
@@ -42,42 +107,158 @@ public class PlayerHomebase implements Serializable {
 
     public void levelUp(Monster monster) {
         if(monster.getEP() >= 100) {
+            monster.setEP(monster.getEP() - 100);
             monster.levelUp();
             System.out.println(monster.getName() + " level up!");
         }
     }
 
     public void evolve(Monster monster) {
-        monster.evolveToAir();
+        Scanner input = new Scanner(System.in);
+        switch (monster.getElement()) {
+            case EARTH:
+                System.out.println("""
+                        1. evolve to fire
+                        2. evolve to ice
+                        """);
+                switch (input.nextInt()) {
+                    case 1:
+                        monster = monster.evolveToFire();
+                        break;
+                    case 2:
+                        monster = monster.evolveToIce();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
+                break;
+            case FIRE:
+                System.out.println("""
+                        1. evolve to wind
+                        2. evolve to earth
+                        """);
+                switch (input.nextInt()) {
+                    case 1:
+                        monster = monster.evolveToWind();
+                        break;
+                    case 2:
+                        monster = monster.evolveToEarth();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
+                break;
+                case WIND:
+                System.out.println("""
+                        1. evolve to water
+                        2. evolve to fire
+                        """);
+                switch (input.nextInt()) {
+                    case 1:
+                        monster = monster.evolveToWater();
+                        break;
+                    case 2:
+                        monster = monster.evolveToFire();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
+                break;
+                case WATER:
+                System.out.println("""
+                        1. evolve to ice
+                        2. evolve to wind
+                        """);
+                switch (input.nextInt()) {
+                    case 1:
+                        monster = monster.evolveToIce();
+                        break;
+                    case 2:
+                        monster = monster.evolveToWind();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
+                break;
+            case ICE:
+                System.out.println("""
+                        1. evolve to earth
+                        2. evolve to water
+                        """);
+                switch (input.nextInt()) {
+                    case 1:
+                        monster = monster.evolveToEarth();
+                        break;
+                    case 2:
+                        monster = monster.evolveToWater();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
+                break;
+            default:
+                System.out.println("Invalid input");
+                break;
+        }
     }
 
     public void exploreDungeon() {
-        Dungeon dungeon = new Dungeon(this);
+        Dungeon dungeon = new Dungeon(this, itemList);
         dungeon.explore();
     }
-
+    
     public Item shopItem() {
         Scanner input = new Scanner(System.in);
+        int EP = 0;
+        Monster monster = null;
+        showMonsters();
+        switch (input.nextInt()) {
+            case 1:
+                monster = petMonsters.get(0);
+                break;
+            case 2:
+                monster = petMonsters.get(1);
+                break;
+            case 3:
+                monster = petMonsters.get(2);
+                break;
+            default:
+            System.out.println("Invalid input");
+                break;
+        }
+        input.nextLine();
         System.out.println("""
                 Shop :
                 0. Exit
-                1. Healing Potion (+10 HP)
-                2. Elixir (+20 EP)
+                1. Healing Potion (+10 HP) 10 EP
+                2. Elixir (+20 EP) 20 EP
                 """);
         switch (input.nextInt()) {
             case 0:
                 break;
             case 1:
                 if(itemList.size() < 3) {
+                    if(monster.getEP() >= 10) {
+                        monster.setEP(monster.getEP() - 10);
                     itemList.add(new ItemHeal("Healing Potion", "Heal"));
+                    }
                 }
                 break;
             case 2:
                 if(itemList.size() < 3) {
-                    itemList.add(new ItemHeal("Elixir", "Elemental"));
+                    if(monster.getEP() >= 20) {
+                        monster.setEP(monster.getEP() - 20);
+                        itemList.add(new ItemHeal("Elixir", "Elemental"));
+                    }
                 }
                 break;
             default:
+            System.out.println("Invalid input");
                 break;
         }
         return null;

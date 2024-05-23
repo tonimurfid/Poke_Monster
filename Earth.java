@@ -14,22 +14,12 @@ public class Earth extends Monster {
     }
 
     @Override
-    public Monster evolveToAngin() {
+    public Monster evolveToWind() {
         return new Wind(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 
     @Override
-    public Monster evolveToAir(){
+    public Monster evolveToWater(){
         return new Water(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
-    }
-    public static void main(String[] args) {
-        Monster monster1 = new Earth("kocak");
-        System.out.println(monster1.getElement());
-        monster1.setHP(200);
-        monster1 = monster1.evolveToAir();
-        System.out.println(monster1.getElement());
-        System.out.println(monster1.getHP());
-        System.out.println(monster1.getAtkPower());
-        System.out.println(monster1.getSpecialAtkPower());
     }
 }

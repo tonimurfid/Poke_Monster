@@ -14,12 +14,12 @@ public class Fire extends Monster {
     }
     
     @Override
-    public Monster evolveToEs() {
+    public Monster evolveToIce() {
         return new Ice(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 
     @Override
-    public Monster evolveToAir(){
+    public Monster evolveToWater(){
         return new Water(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 }

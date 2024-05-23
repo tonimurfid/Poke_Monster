@@ -14,12 +14,12 @@ public class Ice extends Monster {
     }
     
     @Override
-    public Monster evolveToApi() {
+    public Monster evolveToFire() {
         return new Fire(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 
     @Override
-    public Monster evolveToAngin(){
+    public Monster evolveToWind(){
         return new Water(getName(), getLevel(), getHP(), getEP(), getAtkPower(), getSpecialAtkPower(), getElementAtkPower());
     }
 }

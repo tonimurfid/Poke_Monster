@@ -86,21 +86,25 @@ public abstract class Monster implements Serializable{
     }
 
     public void heal() {
-        this.HP = Math.min(100 + (level * 20), 400); // misal 400 adalah max hp
+        int maxHP = 100 + (level * 20);
+        this.HP = maxHP; // misal 400 adalah max hp
     }
-    public Monster evolveToApi() {
+    public Monster evolveToFire() {
         return null;
     }
-    public Monster evolveToAngin() {
+    public Monster evolveToWind() {
         return null;
     }
-    public Monster evolveToTanah() {
+    public Monster evolveToEarth() {
         return null;
     }
-    public Monster evolveToAir() {
+    public Monster evolveToWater() {
         return null;
     }
-    public Monster evolveToEs() {
+    public Monster evolveToIce() {
         return null;
+    }
+    public void setEP(int EP) {
+        this.EP = EP;
     }
 }
