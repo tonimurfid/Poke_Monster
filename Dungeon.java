@@ -126,7 +126,7 @@ public class Dungeon implements Battle {
             if(playerMonster.getHP() <= 0) {
                 System.out.println("YOU LOSE");
             }else if(enemyMonster.getHP() <= 0) {
-                playerMonster.levelUp();
+                playerMonster.setEP(playerMonster.getEP() + 50);
                 System.out.println("YOU WIN");
             }
             System.out.println("""
@@ -169,37 +169,38 @@ public class Dungeon implements Battle {
     }
     @Override
     public void elementAttack(Monster user, Monster target) {
+        int elementAttackPower = user.getElementAtkPower();
         switch (user.getElement()) {
             case EARTH:
                 if(target instanceof Water){
-                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
                 }
                 break;
             case WATER:
                 if(target instanceof Fire){
-                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
                 }
                 break;
             case FIRE:
                 if(target instanceof Ice){
-                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
                 }
                 break;
             case ICE:
                 if(target instanceof Wind){
-                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
                 }
                 break;
             case WIND:
                 if(target instanceof Earth){
-                    user.setElementAtkPower(user.getElementAtkPower()*(int)1.2);
+                    elementAttackPower = (int) (elementAttackPower * 1.2);
                 }
                 break;
             default:
                 break;
         }
-        target.setHP(target.getHP() - user.getElementAtkPower());
-        System.out.println(user.getName() + " used Element Attack on " + target.getName() + " with " + user.getElementAtkPower() + " damage");
+        target.setHP(target.getHP() - elementAttackPower);
+        System.out.println(user.getName() + " used Element Attack on " + target.getName() + " with " + elementAttackPower + " damage");
         System.out.println(target.getName() + " has " + target.getHP() + " HP left");
     }
     @Override

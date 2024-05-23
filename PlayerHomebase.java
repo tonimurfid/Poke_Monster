@@ -84,6 +84,7 @@ public class PlayerHomebase implements Serializable {
         System.out.println("Your monsters:");
         for (Monster monster : petMonsters) {
             System.out.println(monster.getName());
+            System.out.println(monster.getElement());
         }
     }
 
@@ -110,11 +111,17 @@ public class PlayerHomebase implements Serializable {
             monster.setEP(monster.getEP() - 100);
             monster.levelUp();
             System.out.println(monster.getName() + " level up!");
+        }else {
+            System.out.println("Not enough EP");
         }
     }
 
     public void evolve(Monster monster) {
         Scanner input = new Scanner(System.in);
+        int index = petMonsters.indexOf(monster);
+        Monster evolvedMonster = monster;  // To keep track of the evolved monster
+        // System.out.println(evolvedMonster.getName() + " evolve to ?");
+        // System.out.println(evolvedMonster.getElement());
         switch (monster.getElement()) {
             case EARTH:
                 System.out.println("""
@@ -123,14 +130,14 @@ public class PlayerHomebase implements Serializable {
                         """);
                 switch (input.nextInt()) {
                     case 1:
-                        monster = monster.evolveToFire();
+                        evolvedMonster = monster.evolveToFire();
                         break;
                     case 2:
-                        monster = monster.evolveToIce();
+                        evolvedMonster = monster.evolveToIce();
                         break;
                     default:
                         System.out.println("Invalid input");
-                        break;
+                        return;
                 }
                 break;
             case FIRE:
@@ -140,48 +147,48 @@ public class PlayerHomebase implements Serializable {
                         """);
                 switch (input.nextInt()) {
                     case 1:
-                        monster = monster.evolveToWind();
+                        evolvedMonster = monster.evolveToWind();
                         break;
                     case 2:
-                        monster = monster.evolveToEarth();
+                        evolvedMonster = monster.evolveToEarth();
                         break;
                     default:
                         System.out.println("Invalid input");
-                        break;
+                        return;
                 }
                 break;
-                case WIND:
+            case WIND:
                 System.out.println("""
                         1. evolve to water
                         2. evolve to fire
                         """);
                 switch (input.nextInt()) {
                     case 1:
-                        monster = monster.evolveToWater();
+                        evolvedMonster = monster.evolveToWater();
                         break;
                     case 2:
-                        monster = monster.evolveToFire();
+                        evolvedMonster = monster.evolveToFire();
                         break;
                     default:
                         System.out.println("Invalid input");
-                        break;
+                        return;
                 }
                 break;
-                case WATER:
+            case WATER:
                 System.out.println("""
                         1. evolve to ice
                         2. evolve to wind
                         """);
                 switch (input.nextInt()) {
                     case 1:
-                        monster = monster.evolveToIce();
+                        evolvedMonster = monster.evolveToIce();
                         break;
                     case 2:
-                        monster = monster.evolveToWind();
+                        evolvedMonster = monster.evolveToWind();
                         break;
                     default:
                         System.out.println("Invalid input");
-                        break;
+                        return;
                 }
                 break;
             case ICE:
@@ -191,21 +198,25 @@ public class PlayerHomebase implements Serializable {
                         """);
                 switch (input.nextInt()) {
                     case 1:
-                        monster = monster.evolveToEarth();
+                        evolvedMonster = monster.evolveToEarth();
                         break;
                     case 2:
-                        monster = monster.evolveToWater();
+                        evolvedMonster = monster.evolveToWater();
                         break;
                     default:
                         System.out.println("Invalid input");
-                        break;
+                        return;
                 }
                 break;
             default:
                 System.out.println("Invalid input");
-                break;
+                return;
         }
+        petMonsters.set(index, evolvedMonster);
+    
+        System.out.println("Evolved to: " + evolvedMonster.getElement());
     }
+    
 
     public void exploreDungeon() {
         Dungeon dungeon = new Dungeon(this, itemList);
