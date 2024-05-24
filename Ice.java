@@ -5,7 +5,7 @@ public class Ice extends Monster {
         this.element = Element.ICE;
         this.atkPower += 5;
         this.specialAtkPower += 3;
-        this.elementAtkPower += 17;
+        this.elementAtkPower += 15;
     }
     // untuk evolve
     public Ice(String name, int level, int HP, int EP, int atkPower, int specialAtkPower, int elementAtkPower) {

@@ -6,7 +6,8 @@ public class Main {
     public static void main(String[] args) {
         // Create a sample player and monsters for demonstration
         Scanner input = new Scanner(System.in);
-        Player player = new Player("Ash");
+        System.out.print("Masukkan Nama Player: ");
+        Player player = new Player(input.nextLine());
         Monster waterMonster = new Water("Aquarion");
         Monster fireMonster = new Fire("Blazetalon");
         Monster earthMonster = new Earth("Terraquake");
@@ -44,10 +45,10 @@ public class Main {
                     break;
             }
         }
-        GameManager.saveGame(player,"SaveGame/game_save1.txt");
+        GameManager.saveGame(player,"SaveGame/game_save2.txt");
         Player loadPlayer = null;
         try{
-            loadPlayer = GameManager.loadGame("SaveGame/game_save1.txt");
+            loadPlayer = GameManager.loadGame("SaveGame/game_save2.txt");
         }catch(Exception e){
             e.printStackTrace();
             System.exit(0);

@@ -11,9 +11,9 @@ public abstract class Item implements Serializable{
         this.name = nama;
         this.type = type;
     }
-    public void getEffect(Monster monster, Monster target) {}
+    public void getEffect(Monster monster, Monster target){}
 
-    public void getEffect(Monster monster, Monster target, Element element) {}
+    public void getEffect(Monster monster, Monster target, Element element){}
     public String getName() {
         return name;
     }

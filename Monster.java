@@ -5,6 +5,7 @@ import java.util.Scanner;
 public abstract class Monster implements Battle, Serializable{
     protected String name;
     protected int level;
+    protected int maxEvolve = 1;
     protected int HP;
     protected int EP;
     protected int atkPower;
@@ -32,12 +33,19 @@ public abstract class Monster implements Battle, Serializable{
         this.specialAtkPower = specialAtkPower;
         this.elementAtkPower = elementAtkPower;
     }
+    public void useMaxEvolve() {
+        this.maxEvolve--;
+    }
+    public void addMaxEvolve() {
+        this.maxEvolve++;
+    }
     public void setName(String name){
         this.name = name;
     }
     public void setHP(int HP) {
         int maxHP = 100 + (this.level * 20);
-        this.HP = Math.min(HP, 100);
+        this.HP = Math.min(HP, maxHP);
+        this.HP = Math.max(HP, 0);
     }
     public void setLevel(int level) {
         this.level = Math.min(level, 99);
@@ -53,6 +61,10 @@ public abstract class Monster implements Battle, Serializable{
 
     public int getLevel() {
         return level;
+    }
+
+    public int getMaxEvolve() {
+        return maxEvolve;
     }
 
     public int getHP() {
@@ -81,8 +93,9 @@ public abstract class Monster implements Battle, Serializable{
 
     public void levelUp() {
         this.level++;
-        this.HP += 10;
-        this.EP += 5;
+        this.HP = 100 + (this.level * 20);
+        this.EP += 10;
+        this.maxEvolve = 1;
         this.atkPower += 7;
         this.specialAtkPower += 5;
         this.elementAtkPower += 5;
@@ -104,6 +117,10 @@ public abstract class Monster implements Battle, Serializable{
     }
     public void setEP(int EP) {
         this.EP = EP;
+    }
+    public void heal(){
+        this.HP = 100 + (this.level * 20);
+        System.out.println(this.getName() + " has been healed");
     }
     @Override
     public void basicAttack(Monster target) {
@@ -191,17 +208,14 @@ public abstract class Monster implements Battle, Serializable{
                 case 5:
                     element = Element.WIND;
                     break;
-                default:
-            item.getEffect(target, target, element);
+                    
+                }
+            item.getEffect(this, target, element);
             System.out.println("Item used: " + item.getName());
-        }
         }else{
             item.getEffect(this, target);
             System.out.println("Item used: " + item.getName());
         }
-    }
-    public void useItem(Item item, Monster target, Element element) {
-        item.getEffect(this, target, element);
     }
 
     @Override

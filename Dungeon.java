@@ -99,20 +99,13 @@ public class Dungeon{
                     playerMonster.flee();
                 }
                 if (playerMonster.getHP() > 0 && enemyMonster.getHP() > 0) {
-                    int enemyAction = random.nextInt(4)+1;
+                    int enemyAction = random.nextInt(3)+1;
                     if(enemyAction == 1) {
                         enemyMonster.basicAttack(playerMonster);
                     }else if(enemyAction == 2) {
                         enemyMonster.elementAttack(playerMonster);
                     }else if(enemyAction == 3) {
                         enemyMonster.specialAttack(playerMonster);
-                    }else if(enemyAction == 4) {
-                        itemEnemy.add(new ItemElement("Elixir", "Element"));
-                        itemEnemy.add(new ItemHeal("Healer", "Heal"));
-                        int itemChoice = random.nextInt(2)+1;
-                        item = itemEnemy.get(itemChoice-1);
-                        itemEnemy.remove(itemChoice-1);
-                        enemyMonster.useItem(playerMonster, item);
                     }
                 }
             }
@@ -135,6 +128,9 @@ public class Dungeon{
                     break;
                 case 2:
                     homebase.enterHomebase();
+                    break;
+                case 3:
+                    System.exit(0);
                     break;
                 default:
                     break;
